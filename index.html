@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Molitveni lanac</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Public+Sans:wght@400;500;600;700&display=swap');
+:root{
+  /* Brand: crno / bijelo / bež — jedinstvena svijetla tema */
+  --paper:#efe9db; --card:#ffffff; --ink:#1a1a1a; --muted:#6f685c;
+  --line:#ddd3c0; --violet:#1a1a1a; --violet-soft:#e7dec9; --gold:#8a7a5c;
+  --free:#b4a98f; --shadow:0 1px 2px rgba(60,50,30,.05),0 6px 16px rgba(60,50,30,.06);
+  --f-disp:"EB Garamond",Georgia,serif; --f-body:"Public Sans",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 56px}
+
+header{text-align:center;margin-bottom:24px}
+.logo{max-height:84px;width:auto;margin:0 auto 12px;display:block}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 6px}
+h1{font-family:var(--f-disp);font-weight:600;font-size:clamp(2.1rem,6vw,3.1rem);line-height:1.05;margin:0;text-wrap:balance}
+.month{font-family:var(--f-disp);font-style:italic;font-size:clamp(1.1rem,3vw,1.4rem);color:var(--muted);margin-top:6px}
+.month input{font:inherit;font-style:italic;text-align:center;color:var(--ink);background:transparent;border:0;border-bottom:1px dashed var(--line);padding:2px 6px;max-width:100%}
+.note{margin:14px auto 0;max-width:60ch;color:var(--muted);font-size:.95rem}
+.note input{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:center;margin-top:18px}
+.count{display:inline-flex;align-items:baseline;gap:7px;background:var(--violet-soft);color:var(--violet);border-radius:999px;padding:5px 14px;font-weight:600;font-size:.9rem}
+.count b{font-size:1.05rem;font-variant-numeric:tabular-nums}
+.hint{font-size:.85rem;color:var(--muted)}
+.save{font-size:.82rem;color:var(--gold);min-height:1.2em;font-weight:600}
+
+.lead{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.btn{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 16px;cursor:pointer}
+.btn:hover{border-color:var(--violet);color:var(--violet)}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.lead input[type=password]{font:inherit;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);max-width:180px}
+.err{color:#b3261e;font-size:.85rem}
+@media (prefers-color-scheme:dark){.err{color:#f2b8b5}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:22px}
+.slot{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px;display:flex;gap:12px;align-items:flex-start;min-width:0}
+.slot.filled{border-color:color-mix(in srgb,var(--violet) 35%,var(--line))}
+.time{font-family:var(--f-disp);font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums;color:var(--violet);min-width:52px;padding-top:2px}
+.names{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0;flex:1}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--violet-soft);color:var(--ink);border-radius:999px;padding:3px 4px 3px 11px;font-size:.9rem;font-weight:500;max-width:100%}
+.chip.ro{padding:3px 11px}
+.chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rm{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
+.rm:hover{background:color-mix(in srgb,var(--violet) 18%,transparent);color:var(--violet)}
+.free{color:var(--free);font-style:italic;font-size:.9rem}
+.addwrap{display:inline-flex;gap:4px;align-items:center}
+.add{font:inherit;font-size:.88rem;width:9ch;min-width:9ch;background:transparent;border:0;border-bottom:1px dashed var(--line);color:var(--ink);padding:2px 2px}
+.add:focus{outline:none;border-bottom-color:var(--violet);width:12ch}
+.add::placeholder{color:var(--free)}
+.addbtn{border:1px solid var(--line);background:transparent;color:var(--violet);width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:1rem;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.addbtn:hover{background:var(--violet-soft)}
+
+.state{text-align:center;color:var(--muted);margin-top:40px}
+footer{text-align:center;margin-top:34px;color:var(--muted);font-size:.8rem}
+footer .cross{color:var(--gold);font-size:1rem}
+@media (max-width:420px){.wrap{padding-block:22px 44px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="root"><div class="state">Učitavanje rasporeda…</div></div>
+</div>
+
+<script>
+(function(){
+  var TITLE="Molitveni lanac";
+  var API="/api/schedule";
+
+  var TIMES=[];
+  for(var h=0;h<24;h++){for(var m=0;m<60;m+=30){TIMES.push((h<10?"0":"")+h+":"+(m===0?"00":"30"));}}
+
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  var state={month:"",note:"",slots:{}};
+  var canEdit=false, pass="", saving=false, pending=false;
+  var root=document.getElementById("root");
+
+  try{ var sp=sessionStorage.getItem("mlPass"); if(sp) pass=sp; }catch(e){}
+
+  function normalize(p){
+    var st={month:(p&&p.month)||"",note:(p&&p.note)||"",slots:{}};
+    if(p&&p.slots&&typeof p.slots==="object")st.slots=p.slots;
+    for(var i=0;i<TIMES.length;i++){if(!Array.isArray(st.slots[TIMES[i]]))st.slots[TIMES[i]]=[];}
+    return st;
+  }
+
+  function render(){
+    var filled=0,i;
+    for(i=0;i<TIMES.length;i++){if(state.slots[TIMES[i]].length)filled++;}
+    var h="";
+    h+='<header>';
+    h+='<img class="logo" src="logo.png" alt="KZŠ" onerror="this.remove()">';
+    h+='<p class="eyebrow">KZŠ</p>';
+    h+='<h1>'+esc(TITLE)+'</h1>';
+    if(canEdit){h+='<div class="month"><input id="f-month" placeholder="npr. Studeni 2026." value="'+esc(state.month)+'"></div>';}
+    else if(state.month){h+='<div class="month">'+esc(state.month)+'</div>';}
+    h+='<div class="note">Svoj termin prijavite Ivani direktno – 091 151 2942</div>';
+    h+='<div class="bar"><span class="count"><b>'+filled+'</b> / 48 termina popunjeno</span>';
+    if(canEdit){h+='<span class="hint">Upišite ime i pritisnite + ili Enter. Sprema se automatski.</span><span class="save" id="save"></span>';}
+    h+='</div>';
+    // leader controls
+    h+='<div class="lead" id="lead"></div>';
+    h+='</header>';
+
+    h+='<div class="grid">';
+    for(var j=0;j<TIMES.length;j++){
+      var t=TIMES[j],names=state.slots[t],f=names.length>0;
+      h+='<div class="slot'+(f?" filled":"")+'"><div class="time">'+t+'</div><div class="names">';
+      for(var k=0;k<names.length;k++){
+        if(canEdit){h+='<span class="chip"><span>'+esc(names[k])+'</span><button class="rm" data-t="'+t+'" data-i="'+k+'" title="Ukloni">&times;</button></span>';}
+        else{h+='<span class="chip ro"><span>'+esc(names[k])+'</span></span>';}
+      }
+      if(canEdit){h+='<span class="addwrap"><input class="add" data-t="'+t+'" placeholder="dodaj ime" aria-label="Dodaj ime za '+t+'"><button class="addbtn" data-t="'+t+'" title="Dodaj">+</button></span>';}
+      else if(!f){h+='<span class="free">slobodno</span>';}
+      h+='</div></div>';
+    }
+    h+='</div>';
+    root.innerHTML=h;
+    renderLead();
+    if(canEdit)wire();
+  }
+
+  function renderLead(){
+    var el=document.getElementById("lead");if(!el)return;
+    if(canEdit){
+      el.innerHTML='<button class="btn" id="logout">Zaključaj uređivanje</button>';
+      document.getElementById("logout").onclick=function(){canEdit=false;pass="";try{sessionStorage.removeItem("mlPass");}catch(e){}render();};
+    }else{
+      el.innerHTML='<button class="btn" id="loginBtn">Uredi (voditelj)</button>';
+      document.getElementById("loginBtn").onclick=function(){
+        el.innerHTML='<input type="password" id="pw" placeholder="Lozinka voditelja" autocomplete="current-password">'
+          +'<button class="btn primary" id="go">Otključaj</button>'
+          +'<span class="err" id="pwerr"></span>';
+        var pw=document.getElementById("pw");pw.focus();
+        function tryLogin(){
+          var v=pw.value;if(!v)return;
+          document.getElementById("pwerr").textContent="…";
+          verify(v).then(function(ok){
+            if(ok){pass=v;canEdit=true;try{sessionStorage.setItem("mlPass",v);}catch(e){}render();}
+            else{document.getElementById("pwerr").textContent="Pogrešna lozinka";}
+          });
+        }
+        document.getElementById("go").onclick=tryLogin;
+        pw.onkeydown=function(e){if(e.key==="Enter")tryLogin();};
+      };
+    }
+  }
+
+  function setSave(m){var s=document.getElementById("save");if(s)s.textContent=m||"";}
+
+  // Verify by attempting a save of the current state (idempotent).
+  function verify(p){
+    return fetch(API,{method:"POST",headers:{"Content-Type":"application/json","x-leader-pass":p},body:JSON.stringify(state)})
+      .then(function(r){return r.status===200;}).catch(function(){return false;});
+  }
+
+  function save(){
+    if(!canEdit)return;
+    if(saving){pending=true;return;}
+    saving=true;setSave("Spremanje…");
+    fetch(API,{method:"POST",headers:{"Content-Type":"application/json","x-leader-pass":pass},body:JSON.stringify(state)})
+      .then(function(r){
+        saving=false;
+        if(r.status===401){setSave("");canEdit=false;pass="";try{sessionStorage.removeItem("mlPass");}catch(e){}render();return;}
+        if(!r.ok){setSave("Nije spremljeno – pokušajte ponovno");return;}
+        setSave("Spremljeno ✓");setTimeout(function(){setSave("");},1600);
+        if(pending){pending=false;save();}
+      }).catch(function(){saving=false;setSave("Nije spremljeno – provjerite vezu");});
+  }
+
+  function addName(t,val){
+    val=(val||"").trim();if(!val)return;
+    if(!state.slots[t])state.slots[t]=[];
+    state.slots[t].push(val);
+    render();
+    var inp=root.querySelector('.add[data-t="'+t+'"]');if(inp)inp.focus();
+    save();
+  }
+
+  function wire(){
+    root.addEventListener("click",function(e){
+      var rm=e.target.closest(".rm");
+      if(rm){var t=rm.getAttribute("data-t"),i=+rm.getAttribute("data-i");state.slots[t].splice(i,1);render();save();return;}
+      var ab=e.target.closest(".addbtn");
+      if(ab){var t2=ab.getAttribute("data-t");var inp=root.querySelector('.add[data-t="'+t2+'"]');addName(t2,inp?inp.value:"");return;}
+    });
+    root.addEventListener("keydown",function(e){
+      if(e.key==="Enter"&&e.target.classList.contains("add")){e.preventDefault();addName(e.target.getAttribute("data-t"),e.target.value);}
+    });
+    root.addEventListener("change",function(e){
+      if(e.target.id==="f-month"){state.month=e.target.value.trim();save();}
+    });
+  }
+
+  // Load
+  fetch(API,{headers:{"Cache-Control":"no-store"}})
+    .then(function(r){return r.ok?r.json():{};})
+    .then(function(p){
+      state=normalize(p);
+      if(pass){ verify(pass).then(function(ok){canEdit=ok;if(!ok){pass="";try{sessionStorage.removeItem("mlPass");}catch(e){}}render();}); }
+      else{render();}
+    })
+    .catch(function(){
+      state=normalize({});
+      root.innerHTML='<div class="state">Ne mogu učitati raspored. Osvježite stranicu.</div>';
+    });
+})();
+</script>
+</body>
+</html>
