@@ -98,8 +98,8 @@ footer .cross{color:var(--gold);font-size:1rem}
     return st;
   }
 
-  var DAY = TIMES.slice(8,32);                            // 04:00 – 15:30
-  var NIGHT = TIMES.slice(32).concat(TIMES.slice(0,8));   // 16:00 – 03:30
+  var DAY = TIMES.slice(12,36);                           // 06:00 – 17:30
+  var NIGHT = TIMES.slice(36).concat(TIMES.slice(0,12));  // 18:00 – 05:30
 
   function endLabel(t){
     var p=t.split(":"),hh=+p[0],mm=+p[1]+30;
@@ -137,10 +137,10 @@ footer .cross{color:var(--gold);font-size:1rem}
     h+='</header>';
 
     h+='<div class="cols">';
-    h+='<div class="col"><div class="colhead">4:00 – 16:00</div>';
+    h+='<div class="col"><div class="colhead">6:00 – 18:00</div>';
     for(var a=0;a<DAY.length;a++){h+=slotHTML(DAY[a]);}
     h+='</div>';
-    h+='<div class="col"><div class="colhead">16:00 – 4:00</div>';
+    h+='<div class="col"><div class="colhead">18:00 – 6:00</div>';
     for(var b=0;b<NIGHT.length;b++){h+=slotHTML(NIGHT[b]);}
     h+='</div>';
     h+='</div>';
