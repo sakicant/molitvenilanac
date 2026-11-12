@@ -43,7 +43,10 @@ h1{font-family:var(--f-disp);font-weight:600;font-size:clamp(2.1rem,6vw,3.1rem);
 .err{color:#b3261e;font-size:.85rem}
 @media (prefers-color-scheme:dark){.err{color:#f2b8b5}}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:22px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:22px;align-items:start}
+.col{display:flex;flex-direction:column;gap:10px}
+.colhead{font-family:var(--f-disp);font-weight:600;font-size:1rem;color:var(--muted);text-align:center;letter-spacing:.03em;padding-bottom:4px;border-bottom:1px solid var(--line);margin-bottom:2px}
+@media (max-width:720px){.cols{grid-template-columns:1fr}}
 .slot{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px;display:flex;gap:12px;align-items:flex-start;min-width:0}
 .slot.filled{border-color:color-mix(in srgb,var(--violet) 35%,var(--line))}
 .time{font-family:var(--f-disp);font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums;color:var(--violet);min-width:52px;padding-top:2px}
@@ -95,6 +98,22 @@ footer .cross{color:var(--gold);font-size:1rem}
     return st;
   }
 
+  var DAY = TIMES.slice(12,36);                           // 06:00 – 17:30
+  var NIGHT = TIMES.slice(36).concat(TIMES.slice(0,12));  // 18:00 – 05:30
+
+  function slotHTML(t){
+    var names=state.slots[t]||[],f=names.length>0,h='';
+    h+='<div class="slot'+(f?" filled":"")+'"><div class="time">'+t+'</div><div class="names">';
+    for(var k=0;k<names.length;k++){
+      if(canEdit){h+='<span class="chip"><span>'+esc(names[k])+'</span><button class="rm" data-t="'+t+'" data-i="'+k+'" title="Ukloni">&times;</button></span>';}
+      else{h+='<span class="chip ro"><span>'+esc(names[k])+'</span></span>';}
+    }
+    if(canEdit){h+='<span class="addwrap"><input class="add" data-t="'+t+'" placeholder="dodaj ime" aria-label="Dodaj ime za '+t+'"><button class="addbtn" data-t="'+t+'" title="Dodaj">+</button></span>';}
+    else if(!f){h+='<span class="free">slobodno</span>';}
+    h+='</div></div>';
+    return h;
+  }
+
   function render(){
     var filled=0,i;
     for(i=0;i<TIMES.length;i++){if(state.slots[TIMES[i]].length)filled++;}
@@ -113,18 +132,13 @@ footer .cross{color:var(--gold);font-size:1rem}
     h+='<div class="lead" id="lead"></div>';
     h+='</header>';
 
-    h+='<div class="grid">';
-    for(var j=0;j<TIMES.length;j++){
-      var t=TIMES[j],names=state.slots[t],f=names.length>0;
-      h+='<div class="slot'+(f?" filled":"")+'"><div class="time">'+t+'</div><div class="names">';
-      for(var k=0;k<names.length;k++){
-        if(canEdit){h+='<span class="chip"><span>'+esc(names[k])+'</span><button class="rm" data-t="'+t+'" data-i="'+k+'" title="Ukloni">&times;</button></span>';}
-        else{h+='<span class="chip ro"><span>'+esc(names[k])+'</span></span>';}
-      }
-      if(canEdit){h+='<span class="addwrap"><input class="add" data-t="'+t+'" placeholder="dodaj ime" aria-label="Dodaj ime za '+t+'"><button class="addbtn" data-t="'+t+'" title="Dodaj">+</button></span>';}
-      else if(!f){h+='<span class="free">slobodno</span>';}
-      h+='</div></div>';
-    }
+    h+='<div class="cols">';
+    h+='<div class="col"><div class="colhead">6:00 – 18:00</div>';
+    for(var a=0;a<DAY.length;a++){h+=slotHTML(DAY[a]);}
+    h+='</div>';
+    h+='<div class="col"><div class="colhead">18:00 – 6:00</div>';
+    for(var b=0;b<NIGHT.length;b++){h+=slotHTML(NIGHT[b]);}
+    h+='</div>';
     h+='</div>';
     root.innerHTML=h;
     renderLead();
