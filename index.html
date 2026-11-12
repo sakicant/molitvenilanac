@@ -35,7 +35,7 @@ h1{font-family:var(--f-disp);font-weight:600;font-size:clamp(2.1rem,6vw,3.1rem);
 .hint{font-size:.85rem;color:var(--muted)}
 .save{font-size:.82rem;color:var(--gold);min-height:1.2em;font-weight:600}
 
-.lead{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.lead{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:36px;padding-top:22px;border-top:1px solid var(--line);flex-wrap:wrap}
 .btn{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 16px;cursor:pointer}
 .btn:hover{border-color:var(--violet);color:var(--violet)}
 .btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
@@ -128,8 +128,6 @@ footer .cross{color:var(--gold);font-size:1rem}
     h+='<div class="bar"><span class="count"><b>'+filled+'</b> / 48 termina popunjeno</span>';
     if(canEdit){h+='<span class="hint">Upišite ime i pritisnite + ili Enter. Sprema se automatski.</span><span class="save" id="save"></span>';}
     h+='</div>';
-    // leader controls
-    h+='<div class="lead" id="lead"></div>';
     h+='</header>';
 
     h+='<div class="cols">';
@@ -140,6 +138,7 @@ footer .cross{color:var(--gold);font-size:1rem}
     for(var b=0;b<NIGHT.length;b++){h+=slotHTML(NIGHT[b]);}
     h+='</div>';
     h+='</div>';
+    h+='<div class="lead" id="lead"></div>';
     root.innerHTML=h;
     renderLead();
     if(canEdit)wire();
