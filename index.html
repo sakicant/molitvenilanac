@@ -127,7 +127,6 @@ footer .cross{color:var(--gold);font-size:1rem}
     var h="";
     h+='<header>';
     h+='<img class="logo" src="logo.png" alt="KZŠ" onerror="this.remove()">';
-    h+='<p class="eyebrow">KZŠ</p>';
     h+='<h1>'+esc(TITLE)+'</h1>';
     if(canEdit){h+='<div class="month"><input id="f-month" placeholder="npr. Studeni 2026." value="'+esc(state.month)+'"></div>';}
     else if(state.month){h+='<div class="month">'+esc(state.month)+'</div>';}
