@@ -49,7 +49,7 @@ h1{font-family:var(--f-disp);font-weight:600;font-size:clamp(2.1rem,6vw,3.1rem);
 @media (max-width:720px){.cols{grid-template-columns:1fr}}
 .slot{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px;display:flex;gap:12px;align-items:flex-start;min-width:0}
 .slot.filled{border-color:color-mix(in srgb,var(--violet) 35%,var(--line))}
-.time{font-family:var(--f-disp);font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums;color:var(--violet);min-width:52px;padding-top:2px}
+.time{font-family:var(--f-disp);font-weight:600;font-size:1rem;font-variant-numeric:tabular-nums;color:var(--violet);min-width:102px;white-space:nowrap;padding-top:3px}
 .names{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0;flex:1}
 .chip{display:inline-flex;align-items:center;gap:5px;background:var(--violet-soft);color:var(--ink);border-radius:999px;padding:3px 4px 3px 11px;font-size:.9rem;font-weight:500;max-width:100%}
 .chip.ro{padding:3px 11px}
@@ -101,9 +101,15 @@ footer .cross{color:var(--gold);font-size:1rem}
   var DAY = TIMES.slice(8,32);                            // 04:00 – 15:30
   var NIGHT = TIMES.slice(32).concat(TIMES.slice(0,8));   // 16:00 – 03:30
 
+  function endLabel(t){
+    var p=t.split(":"),hh=+p[0],mm=+p[1]+30;
+    if(mm>=60){mm=0;hh+=1;}
+    return (hh<10?"0":"")+hh+":"+(mm===0?"00":"30");
+  }
+
   function slotHTML(t){
     var names=state.slots[t]||[],f=names.length>0,h='';
-    h+='<div class="slot'+(f?" filled":"")+'"><div class="time">'+t+'</div><div class="names">';
+    h+='<div class="slot'+(f?" filled":"")+'"><div class="time">'+t+'–'+endLabel(t)+'</div><div class="names">';
     for(var k=0;k<names.length;k++){
       if(canEdit){h+='<span class="chip"><span>'+esc(names[k])+'</span><button class="rm" data-t="'+t+'" data-i="'+k+'" title="Ukloni">&times;</button></span>';}
       else{h+='<span class="chip ro"><span>'+esc(names[k])+'</span></span>';}
