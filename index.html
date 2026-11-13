@@ -139,16 +139,12 @@ footer .cross{color:var(--gold);font-size:1rem}
     h+='<h1>'+esc(TITLE)+'</h1>';
     if(canEdit){h+='<div class="month"><input id="f-month" placeholder="npr. Studeni 2026." value="'+esc(state.month)+'"></div>';}
     else if(state.month){h+='<div class="month">'+esc(state.month)+'</div>';}
-    h+='<div class="note">Svoj termin prijavite Ivani direktno – 091 151 2942</div>';
+    h+='<div class="note">Za uključiti se u lanac, svoj termin javi direktno Ivani – 091 151 2942</div>';
     h+='<div class="contact">'
       +'<a class="ic" href="tel:'+TEL+'" aria-label="Nazovi Ivanu" title="Nazovi Ivanu">'+PHONE_SVG+'</a>'
       +'<a class="ic wa" href="'+WA+'" target="_blank" rel="noopener" aria-label="WhatsApp Ivani" title="WhatsApp Ivani">'+WA_SVG+'</a>'
       +'</div>';
-    var free=48-filled;
-    h+='<div class="bar"><span class="count"><b>'+filled+'</b> popunjeno</span>';
-    h+='<span class="count alt"><b>'+free+'</b> slobodno</span>';
-    if(canEdit){h+='<span class="hint">Upišite ime i pritisnite + ili Enter. Sprema se automatski.</span><span class="save" id="save"></span>';}
-    h+='</div>';
+    if(canEdit){h+='<div class="bar"><span class="hint">Upišite ime i pritisnite + ili Enter. Sprema se automatski.</span><span class="save" id="save"></span></div>';}
     h+='</header>';
 
     h+='<div class="cols">';
